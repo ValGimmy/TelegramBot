@@ -1,23 +1,24 @@
 import asyncio
 import logging
+import os
 from aiogram import Bot, Dispatcher, types
-from aiogram.types import Message
 from aiogram.enums import ParseMode
+from aiogram.types import Message
 from aiogram.webhook.aiohttp_server import setup_application
 from aiohttp import web
 from dotenv import load_dotenv
-import os
 
 from utils import get_welcome_message
 from keyboards import welcome_keyboard
 
-# Загрузка .env из Render
+# Загрузка переменных окружения
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 
-bot = Bot(token=BOT_TOKEN)
+if not BOT_TOKEN or not WEBHOOK_URL:
+    raise ValueError("BOT_TOKEN or WEBHOOK_URL not set")
 
 bot = Bot(token=BOT_TOKEN, parse_mode=ParseMode.HTML)
 dp = Dispatcher()
