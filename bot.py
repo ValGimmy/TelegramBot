@@ -11,11 +11,13 @@ import os
 from utils import get_welcome_message
 from keyboards import welcome_keyboard
 
-# Загрузка .env
+# Загрузка .env из Render
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 WEBHOOK_URL = os.getenv("WEBHOOK_URL")
+
+bot = Bot(token=BOT_TOKEN)
 
 bot = Bot(token=BOT_TOKEN, parse_mode=ParseMode.HTML)
 dp = Dispatcher()
